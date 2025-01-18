@@ -1,0 +1,113 @@
+1. DNS Request: Resolving the Domain Name
+
+The first step is converting the human-readable domain name www.google.com into an IP address. This process is called DNS resolution and involves the following:
+
+Browser Cache: Your browser first checks its cache for the IP address of www.google.com.
+
+Operating System Cache: If not found in the browser cache, the OS cache is checked.
+
+Recursive DNS Query: If the OS cache is empty, a recursive query is sent to a DNS resolver (usually provided by your ISP or a public DNS like Google DNS).
+
+Root Server: The resolver queries a root DNS server to find the TLD (e.g., .com) server.
+
+TLD Server: The TLD server provides the authoritative DNS server for google.com.
+
+Authoritative DNS Server: This server returns the IP address for www.google.com.
+
+Once the IP address is resolved, the browser can establish a connection.
+
+2. TCP/IP: Establishing a Connection
+
+With the IP address in hand, the browser uses the TCP/IP stack to establish a connection:
+
+TCP Handshake: A three-way handshake is performed to establish a reliable connection between the browser and the server:
+
+The client sends a SYN packet to the server.
+
+The server responds with a SYN-ACK packet.
+
+The client sends an ACK packet, completing the handshake.
+
+IP Protocol: The data packets are routed over the internet using IP.
+
+3. Firewall: Securing the Network
+
+The request passes through firewalls along the way, including those at the client side, intermediate routers, and the server side. Firewalls filter traffic based on predefined security rules, blocking unauthorized access or malicious data.
+
+4. HTTPS/SSL: Encrypting the Communication
+
+Since the URL starts with https://, the browser initiates an SSL/TLS handshake to establish a secure connection:
+
+Certificate Exchange: The server provides an SSL certificate, which the browser verifies using a trusted certificate authority.
+
+Session Key: A symmetric session key is negotiated and used to encrypt data for the duration of the session.
+
+This ensures that the communication between the browser and the server is encrypted and secure.
+
+5. Load Balancer: Distributing Traffic
+
+The request reaches a load balancer, which distributes incoming traffic across multiple servers to:
+
+Prevent overloading a single server.
+
+Ensure high availability and fault tolerance.
+
+The load balancer uses algorithms like Round Robin, Least Connections, or IP Hashing to decide which server will handle the request.
+
+6. Web Server: Handling the Request
+
+The load balancer forwards the request to a web server (e.g., Nginx or Apache). The web server performs the following tasks:
+
+Serves static content like HTML, CSS, and JavaScript files.
+
+Forwards dynamic requests to the application server.
+
+7. Application Server: Processing Logic
+
+The web server passes dynamic requests to an application server (e.g., Node.js, Python, Ruby on Rails). The application server:
+
+Executes business logic based on the request.
+
+Interacts with the database to fetch or update data.
+
+For instance, a search query on Google might trigger the application server to retrieve matching results from its index.
+
+8. Database: Storing and Retrieving Data
+
+The application server queries a database (e.g., MySQL, PostgreSQL) to:
+
+Fetch relevant data for the user’s request.
+
+Update records, if necessary.
+
+Databases are often configured in a Primary-Replica setup to improve performance and reliability. The primary node handles write operations, while replica nodes handle read operations.
+
+9. Response to the User
+
+Once the application server processes the request and retrieves data, the response is sent back through the following steps:
+
+Application server → Web server → Load balancer → Firewall → Browser.
+
+The browser decrypts the data, renders the HTML, CSS, and JavaScript, and displays the web page to the user.
+
+Summary
+
+The journey of a single request involves:
+
+DNS Resolution: Translating the domain name to an IP address.
+
+TCP/IP: Establishing a reliable connection.
+
+Firewall: Protecting the network.
+
+HTTPS/SSL: Securing the communication.
+
+Load Balancer: Distributing traffic across servers.
+
+Web Server: Serving static content or forwarding requests.
+
+Application Server: Processing business logic.
+
+Database: Storing and retrieving data.
+
+This intricate process happens in milliseconds, delivering a seamless experience to the user. Understanding these components not only prepares you for interviews but also enhances your appreciation of the web’s complexity.
